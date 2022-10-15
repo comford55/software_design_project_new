@@ -14,15 +14,20 @@ public class User {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="id")
     private Integer id;
-    private String name;
-
+    @Column(name="username", unique=true, nullable=true)
+    private String username;
+    @Column(name="email", unique=true, nullable=true)
+    private String email;
+    @Column(name="password", nullable=true)
+    private String password;
+    
     // private Gag gag;
     
-    public User(Integer id, String name) {
-        super();
-        this.id = id;
-        this.name = name;
-    }
+    // public User(Integer id, String name) {
+    //     super();
+    //     this.id = id;
+    //     this.name = name;
+    // }
 
     public User() {
 
@@ -37,11 +42,11 @@ public class User {
     }
 
     public String getName() {
-        return this.name;
+        return this.username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setName(String username) {
+        this.username = username;
     }
 
     // public Gag getGag() {
@@ -51,4 +56,28 @@ public class User {
     // public void setGag(Gag gag) {
     //     this.gag = gag;
     // }
+
+    public String getEmail() {
+        return this.email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return this.password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public User(Integer id, String username, String email, String password) {
+        super();
+        this.id = id;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+    }
 }

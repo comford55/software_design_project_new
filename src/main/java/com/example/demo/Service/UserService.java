@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.Entity.Gag;
 import com.example.demo.Entity.GagDetail;
+import com.example.demo.Entity.User;
 import com.example.demo.Repository.GagRepository;
 import com.example.demo.Repository.UserRepository;
 import com.fasterxml.jackson.core.JsonParseException;
@@ -54,5 +55,9 @@ public class UserService {
         double random = Math.random() * count + 1;
         Optional<Gag> result = gagRepository.findById((int) random);
         return result.get();
+    }
+
+    public void saveUser(User user){
+        userRepository.save(user);
     }
 }

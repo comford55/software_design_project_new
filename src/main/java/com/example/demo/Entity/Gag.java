@@ -1,5 +1,6 @@
 package com.example.demo.Entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,8 +13,12 @@ public class Gag {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @Column(name = "gagId", unique = true)
     private String gagId;
-
+    @Column(name="gagDetail", length = 1000000)
+    private String gagDetail;
+    private String author;
+    
     public String getGagId() {
         return this.gagId;
     }
@@ -21,9 +26,6 @@ public class Gag {
     public void setGagId(String gagId) {
         this.gagId = gagId;
     }
-
-    private String gagDetail;
-    private String author;
 
     // private User user;
 
