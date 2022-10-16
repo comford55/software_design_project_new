@@ -19,9 +19,18 @@
             </thead>
             <tbody>
                 <tr th:each="gag: ${gags}">
+                    <!-- <td th:text="${gag.gagId}"/> -->
+                    <!-- <td th:if="${gag.category != null}" th:text="${gag.category.categoryName}"/> -->
                     <td th:text="${gag.gagDetail}"/>
                     <td th:text="${gag.author}"/>
                 </tr>
+                <form method="POST" th:action="@{/like_passage}" th:object="${gags}">
+                    <!-- <input type="hidden" th:field="*{Id}" /> -->
+                    <!-- <input type="hidden" th:field="*{gagId}" /> -->
+                    <input type="hidden" th:field="*{gagDetail}" />
+                    <input type="hidden" th:field="*{author}" />
+                    <button type="submit">Like</button>
+                </form>
             </tbody>
         </table>
     <h1><a href="/randomgag">New Gag</a></h1>

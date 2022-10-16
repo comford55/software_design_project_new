@@ -9,11 +9,12 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.Entity.Gag;
-import com.example.demo.Entity.GagDetail;
-import com.example.demo.Entity.User;
-import com.example.demo.Repository.GagRepository;
-import com.example.demo.Repository.UserRepository;
+import com.example.demo.Entity.Category;
+import com.example.demo.Entity.Story;
+import com.example.demo.Entity.StoryDetail;
+import com.example.demo.Repository.CategoryRepository;
+import com.example.demo.Repository.StoryRepository;
+// import com.example.demo.Repository.UserRepository;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -22,17 +23,22 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Service
 public class UserService {
 
+    // @Autowired
+    // private UserRepository userRepository;
     @Autowired
-    private UserRepository userRepository;
+    private StoryRepository storyRepository;
     @Autowired
-    private GagRepository gagRepository;
+    private CategoryRepository categoryRepository;
+
+    // @Autowired
+    // private LikeGagRepository likeGagRepository;
 
     public void getJson() throws JsonParseException, JsonMappingException, IOException{
         ObjectMapper objectMapper = new ObjectMapper();
-        List<GagDetail> gag = objectMapper.readValue(new File("src/main/resources/test.json"), new TypeReference<List<GagDetail>>(){});
-        if(gag!=null && !gag.isEmpty()){
-            List<Gag> gags = new ArrayList<>();
-            gag.forEach(g -> gags.add(new Gag(g.getId(), g.getGagDetail(), g.getAuthor())));
+        List<StoryDetail> story = objectMapper.readValue(new File("src/main/resources/data.json"), new TypeReference<List<StoryDetail>>(){});
+        if(story!=null && !story.isEmpty()){
+            List<Story> stories = new ArrayList<>();
+            story.forEach(g -> stories.add(new Story(g.getTitle(), g.getStoryDetail(), g.getAuthor())));
 
             // gagRepository.saveAll(gags);
 
@@ -46,18 +52,51 @@ public class UserService {
         }
     }
 
-    public List<Gag> allGags(){
-        return gagRepository.findAll();
+    public List<Story> allGags(){
+        return storyRepository.findAll();
     }
 
-    public Gag getRandomGag(){
-        double count = gagRepository.count();
+    public Story getRandomGag(){
+        double count = storyRepository.count();
         double random = Math.random() * count + 1;
-        Optional<Gag> result = gagRepository.findById((int) random);
+        Optional<Story> result = storyRepository.findById((int) random);
         return result.get();
     }
 
-    public void saveUser(User user){
-        userRepository.save(user);
+    public Story getRandomHorror(){
+        List<Category> getHorrorCategory = categoryRepository.findByCategoryName("เรื่องสยอง");
+        int random = (int) (Math.random() * getHorrorCategory.size());
+        int categoryId = getHorrorCategory.get(random).getStory().getId();
+        Optional<Story> result = storyRepository.findById(categoryId);
+        return result.get();
+    }
+
+    public Story getRandomComedy(){
+        List<Category> getComedyCategory = categoryRepository.findByCategoryName("เรื่องตลก");
+        int random = (int) (Math.random() * getComedyCategory.size());
+        int categoryId = getComedyCategory.get(random).getStory().getId();
+        Optional<Story> result = storyRepository.findById(categoryId);
+        return result.get();
+    }
+
+    public void saveStory(Story gag){
+        storyRepository.save(gag);
+    }
+
+    public List<Category> saveCategory(String category){
+        if(category == "เรื่องตลก"){
+            Category comedy = new Category("เรื่องตลก");
+            return List.of(comedy);
+        } else {
+            Category horror = new Category("เรื่องสยอง");
+            return List.of(horror);
+        }
+    }
+
+    public List<Story> getSpecificCategory(String category){
+        List<Category> getMatchCategory = categoryRepository.findByCategoryName(category);
+        List<Story> match = new ArrayList<Story>();
+        getMatchCategory.forEach(g -> match.add(g.getStory()));
+        return match;
     }
 }

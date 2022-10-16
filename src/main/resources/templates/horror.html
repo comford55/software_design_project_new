@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Horror</title>
+</head>
+<body>
+    <h1 align="center">Horror</h1>
+    <h3><a href="/category/horror/all">เรื่องสยองทั้งหมด</a></h3>
+    <h3><a href="/category/horror/random">สุ่มเรื่องสยอง</a></h3>
+    <h3><a href="/category/horror/add">เพิ่มเรื่องสยอง</a></h3>
+
+    <hr/>
+        <table class="table table-striped table-bordered" id="customersTable">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Detail</th>
+                    <th>Author</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="horror: ${horrors}">
+                    <td th:text="${horror.title}"/>
+                    <td th:text="${horror.storyDetail}"/>
+                    <td th:text="${horror.author}"/>
+                </tr>
+            </tbody>
+        </table>
+    <h1><a href="/">back to home</a></h1>
+</body>
+</html>

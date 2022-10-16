@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add your Comedy Story</title>
+</head>
+<body>
+    <h1>Add your Comedy story</h1>
+    <form method="post" th:action="@{/addComedy}" th:object="${comedy}">
+        <div>
+            <label>Title : </label>
+            <input type="text" th:field="*{title}" placeholder="Title"></input>
+        </div>
+        <div>
+            <label>Story Detail : </label>
+            <input type="text" th:field="*{storyDetail}" placeholder="Story Detail" required></input>
+        </div>
+        <div>
+            <label>Author : </label>
+            <input type="text" th:field="*{author}" placeholder="Author"></input>
+        </div>
+        <button type="submit">Add Comedy Story</button>
+    </form>
+    <h1><a href="/">back to home</a></h1>
+</body>
+</html>

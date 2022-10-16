@@ -9,15 +9,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.example.demo.Entity.Gag;
-import com.example.demo.Entity.User;
+import com.example.demo.Entity.Category;
+import com.example.demo.Entity.Story;
 import com.example.demo.Service.UserService;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 
 @Controller
 public class IndexController {
-
 
     private UserService userService;
 
@@ -26,8 +25,8 @@ public class IndexController {
         this.userService = userService;
     }
 
-    @GetMapping()
-    public String index(){
+    @GetMapping("/")
+    public String home(){
         return "index";
     }
 
@@ -39,28 +38,98 @@ public class IndexController {
 
     @GetMapping("/allgags")
     public String showAllGag(Model model){
-        List<Gag> gags = userService.allGags();
+        List<Story> gags = userService.allGags();
         model.addAttribute("gags", gags);
         return "allGags";
     }
 
     @GetMapping("/randomgag")
     public String randomGag(Model model){
-        Gag gag = userService.getRandomGag();
+        Story gag = userService.getRandomGag();
         model.addAttribute("gags", gag);
         return "randomGag";
     }
 
-    @GetMapping("/register")
-    public String register(Model model){
-        User user = new User();
-        model.addAttribute("user", user);
+    @GetMapping("/category/comedy/all")
+    public String allComedy(Model model){
+        Object comedy = userService.getSpecificCategory("เรื่องตลก");
+        model.addAttribute("comedies", comedy);
+        return "comedy";
+    }
+
+    @GetMapping("/category/comedy/random")
+    public String randomComedy(Model model){
+        Story comedy = userService.getRandomComedy();
+        model.addAttribute("comedies", comedy);
+        return "comedy";
+    }
+
+    @GetMapping("/category/horror/all")
+    public String allHorror(Model model){
+        Object horror = userService.getSpecificCategory("เรื่องสยอง");
+        model.addAttribute("horrors", horror);
+        return "horror";
+    }
+
+    @GetMapping("/category/horror/random")
+    public String randomHorror(Model model){
+        Story horror = userService.getRandomHorror();
+        model.addAttribute("horrors", horror);
+        return "horror";
+    }
+
+    @GetMapping("/category/horror/add")
+    public String addHorror(Model model){
+        Story story = new Story();
+        model.addAttribute("horror", story);
+        return "addHorror";
+    }
+
+    @PostMapping("/addHorror")
+    public String addHorrorSuccess(Story story){
+        List<Category> category = userService.saveCategory("เรื่องสยอง");
+        story.setCategory(category);
+        userService.saveStory(story);
+        return "horrorIndex";
+    }
+
+    @GetMapping("/category/comedy/add")
+    public String addComedy(Model model){
+        Story story = new Story();
+        model.addAttribute("comedy", story);
+        return "addComedy";
+    }
+
+    @PostMapping("/addComedy")
+    public String addComedy(Story story){
+        List<Category> category = userService.saveCategory("เรื่องตลก");
+        story.setCategory(category);
+        userService.saveStory(story);
+        return "comedyIndex";
+    }
+
+    @GetMapping("/addGag")
+    public String addGag(Model model){
+        Story gag = new Story();
+        model.addAttribute("gag", gag);
         return "register";
     }
 
-    @PostMapping("/register_success")
-    public String registerSuccess(User user){
-        userService.saveUser(user);
-        return "registerSuccess";
+    // @PostMapping("/addGag_success")
+    // public String addGagSuccess(Story gag){
+    //     Category category = userService.saveCategory();
+    //     gag.setCategory(category);
+    //     userService.saveStory(gag);
+    //     return "registerSuccess";
+    // }
+
+    @GetMapping("/category/comedy")
+    public String goToComedy(Model model){
+        return "comedyIndex";
+    }
+
+    @GetMapping("/category/horror")
+    public String horrorIndex(Model model){
+        return "horrorIndex";
     }
 }

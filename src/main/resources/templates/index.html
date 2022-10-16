@@ -7,8 +7,12 @@
     <title>Document</title>
 </head>
 <body>
-    <h1 align="center">ไม่ฮาก็แป้ก</h1>
-    <h3><a href="/allgags">All Gags</a></h3>
-    <h3><a href="/randomgag">Random Gag</a></h3>
+    <h1 align="center">เรื่องตลกก็ดี เรื่องผีก็น่ากลัว</h1>
+    <form th:action="@{/category/comedy}" method="GET">
+        <input type="submit" value="เรื่องตลก"/>
+    </form>
+    <form th:action="@{/category/horror}" method="GET">
+        <input type="submit" value="เรื่องสยอง"/>
+    </form>
 </body>
 </html>

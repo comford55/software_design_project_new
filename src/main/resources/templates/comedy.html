@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comedy</title>
+</head>
+<body>
+    <h1 align="center">เรื่องตลกก็ดี</h1>
+    <!-- <form th:action="@{/category/comedy/all}" method="GET">
+        <input type="submit" value="เรื่องตลกทั้งหมด"/>
+    </form>
+    <form th:action="@{/category/comedy/random}" method="GET">
+        <input type="submit" value="สุ่มเรื่องตลก"/>
+    </form> -->
+    <h3><a href="/category/comedy/all">เรื่องตลกทั้งหมด</a></h3>
+    <h3><a href="/category/comedy/random">สุ่มเรื่องตลก</a></h3>
+    <h3><a href="/category/comedy/add">เพิ่มเรื่องตลก</a></h3>
+
+    <hr/>
+        <table class="table table-striped table-bordered" id="customersTable">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Detail</th>
+                    <th>Author</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="comedy: ${comedies}">
+                    <td th:text="${comedy.title}"/>
+                    <td th:text="${comedy.storyDetail}"/>
+                    <td th:text="${comedy.author}"/>
+                </tr>
+            </tbody>
+        </table>
+    <h1><a href="/">back to home</a></h1>
+</body>
+</html>

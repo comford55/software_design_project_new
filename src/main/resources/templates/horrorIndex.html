@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Horror</title>
+</head>
+<body>
+    <h1 align="center">เรื่องผีก็น่ากลัว</h1>
+    <form th:action="@{/category/horror/all}" method="GET">
+        <input type="submit" value="เรื่องสยองทั้งหมด"/>
+    </form>
+    <form th:action="@{/category/horror/random}" method="GET">
+        <input type="submit" value="สุ่มเรื่องสยอง"/>
+    </form>
+    <form th:action="@{/category/horror/add}" method="GET">
+        <input type="submit" value="เพิ่มเรื่องสยอง"/>
+    </form>
+</body>
+</html>
