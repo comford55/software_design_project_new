@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -29,6 +30,10 @@ public class Story {
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "story_id", referencedColumnName = "id")
     private List<Category> category = new ArrayList<Category>();
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "like_id")
+    private LikeStory likeStory;
 
     public Story() {
         

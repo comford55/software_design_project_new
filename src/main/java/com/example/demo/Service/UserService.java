@@ -7,7 +7,10 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort.Order;
 import org.springframework.stereotype.Service;
+import org.springframework.data.domain.Sort;
+
 
 import com.example.demo.Entity.Category;
 import com.example.demo.Entity.LikeStory;
@@ -33,21 +36,18 @@ public class UserService {
 
     public void getJson() throws JsonParseException, JsonMappingException, IOException{
         ObjectMapper objectMapper = new ObjectMapper();
-        List<StoryDetail> story = objectMapper.readValue(new File("src/main/resources/data.json"), new TypeReference<List<StoryDetail>>(){});
-        if(story!=null && !story.isEmpty()){
-            List<Story> stories = new ArrayList<>();
-            story.forEach(g -> stories.add(new Story(g.getTitle(), g.getStoryDetail(), g.getAuthor())));
+        List<StoryDetail> horrorStory = objectMapper.readValue(new File("src/main/resources/horrordata.json"), new TypeReference<List<StoryDetail>>(){});
+        List<StoryDetail> comedyStory = objectMapper.readValue(new File("src/main/resources/comedydata.json"), new TypeReference<List<StoryDetail>>(){});
+        List<Story> stories = new ArrayList<>();
+        horrorStory.forEach(g -> stories.add(new Story(g.getTitle(), g.getStoryDetail(), g.getAuthor())));
+        comedyStory.forEach(g -> stories.add(new Story(g.getTitle(), g.getStoryDetail(), g.getAuthor())));
 
-            // gagRepository.saveAll(gags);
+        // if(story!=null && !story.isEmpty()){
+        //     List<Story> stories = new ArrayList<>();
+        //     story.forEach(g -> stories.add(new Story(g.getTitle(), g.getStoryDetail(), g.getAuthor())));
 
-            // List<Gag> a = gagRepository.findAll();
-            // for(int i=0;i<gag.size();i++){
-            //     if((a.get(i).getGagId())!=(gag.get(i).getId())){
-            //         System.out.println(a.get(i).getGagId());
-            //         System.out.println(gag.get(i).getId());
-            //     }
-            // }
-        }
+        //     gagRepository.saveAll(gags);
+        // }
     }
 
     public List<Story> allGags(){
@@ -63,6 +63,9 @@ public class UserService {
 
     public Story getRandomHorror(){
         List<Category> getHorrorCategory = categoryRepository.findByCategoryName("เรื่องสยอง");
+        if(getHorrorCategory.isEmpty()){
+            return new Story();
+        }
         int random = (int) (Math.random() * getHorrorCategory.size());
         int categoryId = getHorrorCategory.get(random).getStory().getId();
         Optional<Story> result = storyRepository.findById(categoryId);
@@ -71,6 +74,9 @@ public class UserService {
 
     public Story getRandomComedy(){
         List<Category> getComedyCategory = categoryRepository.findByCategoryName("เรื่องตลก");
+        if(getComedyCategory.isEmpty()){
+            return new Story();
+        }
         int random = (int) (Math.random() * getComedyCategory.size());
         int categoryId = getComedyCategory.get(random).getStory().getId();
         Optional<Story> result = storyRepository.findById(categoryId);
@@ -104,16 +110,20 @@ public class UserService {
         return match;
     }
 
-    public void saveLikeStory(String storyId){
+    public void saveLikeStory(Integer storyId){
         Optional<LikeStory> list = likeStoryRepository.findByStoryId(storyId);
         if(!list.isEmpty()){
             LikeStory like = list.get();
             like.increaseCount();
             likeStoryRepository.save(like);
         } else {
-            LikeStory story = new LikeStory(storyId);
+            LikeStory story = new LikeStory(storyRepository.findById(storyId).get());
             story.increaseCount();
             likeStoryRepository.save(story);
         }
+    }
+
+    public List<LikeStory> getLikeStory(){
+        return likeStoryRepository.findAll(Sort.by(Order.by("count")));
     }
 }

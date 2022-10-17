@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.Entity.Category;
+import com.example.demo.Entity.LikeStory;
 import com.example.demo.Entity.Story;
 import com.example.demo.Service.UserService;
 import com.fasterxml.jackson.core.JsonParseException;
@@ -31,28 +32,28 @@ public class IndexController {
         return "index";
     }
 
-    @GetMapping("/gags")
+    @GetMapping("/addBaseStory")
     public String gags() throws JsonParseException, JsonMappingException, IOException{
         userService.getJson();
         return "index";
     }
 
-    @GetMapping("/allgags")
-    public String showAllGag(Model model){
-        List<Story> gags = userService.allGags();
-        model.addAttribute("gags", gags);
-        return "allGags";
-    }
+    // @GetMapping("/allgags")
+    // public String showAllGag(Model model){
+    //     List<Story> gags = userService.allGags();
+    //     model.addAttribute("gags", gags);
+    //     return "allGags";
+    // }
 
-    @GetMapping("/randomgag")
-    public String randomGag(Model model){
-        Story gag = userService.getRandomGag();
-        model.addAttribute("gags", gag);
-        return "randomGag";
-    }
+    // @GetMapping("/randomgag")
+    // public String randomGag(Model model){
+    //     Story gag = userService.getRandomGag();
+    //     model.addAttribute("gags", gag);
+    //     return "randomGag";
+    // }
 
     @GetMapping("/category/comedy")
-    public String goToComedy(Model model){
+    public String comedyIndex(Model model){
         return "comedyIndex";
     }
 
@@ -127,15 +128,15 @@ public class IndexController {
     }
 
     @PostMapping("/like_story")
-    public String likeStory(@RequestParam String storyId){
+    public String likeStory(@RequestParam Integer storyId){
         userService.saveLikeStory(storyId);
         return "index";
     }
-    // @PostMapping("/addGag_success")
-    // public String addGagSuccess(Story gag){
-    //     Category category = userService.saveCategory();
-    //     gag.setCategory(category);
-    //     userService.saveStory(gag);
-    //     return "registerSuccess";
-    // }
+
+    @GetMapping("/mostlike")
+    public String mostLike(Model model){
+        List<LikeStory> list = userService.getLikeStory();
+        model.addAttribute("allLike", list);
+        return "likeStory";
+    }
 }

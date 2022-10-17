@@ -1,10 +1,11 @@
 package com.example.demo.Entity;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -13,12 +14,19 @@ public class LikeStory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(name="storyId")
-    private String storyId;
+    // private String storyId;
     private int count;
 
+    @OneToOne
+    @JoinColumn(name = "id_story")
+    private Story story;
+
+    public LikeStory(Story story) {
+        this.story = story;
+    }
+
     public LikeStory(String storyId) {
-        this.storyId = storyId;
+        // this.storyId = storyId;
         this.count = 0;
     }
 
@@ -33,14 +41,6 @@ public class LikeStory {
         this.id = id;
     }
 
-    public String getStoryId() {
-        return storyId;
-    }
-
-    public void setStoryId(String storyId) {
-        this.storyId = storyId;
-    }
-
     public int getCount() {
         return count;
     }
@@ -51,5 +51,13 @@ public class LikeStory {
     
     public void increaseCount(){
         this.count++;
+    }
+
+    public Story getStory() {
+        return story;
+    }
+
+    public void setStory(Story story) {
+        this.story = story;
     }
 }

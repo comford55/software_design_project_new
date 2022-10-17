@@ -10,6 +10,8 @@ public class StoryDetail {
     @JsonProperty("author")
     private String author;
 
+    private Category category;
+
     public StoryDetail() {
 
     }
@@ -44,4 +46,11 @@ public class StoryDetail {
         this.author = author;
     }
 
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
 }

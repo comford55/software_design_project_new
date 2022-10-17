@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Favorite</title>
+</head>
+<body>
+    <h1 align="center">เรื่องที่ผู้คนชื่นชอบ</h1>
+    <!-- <h3><a href="/category/comedy/all">เรื่องตลกทั้งหมด</a></h3>
+    <h3><a href="/category/comedy/random">สุ่มเรื่องตลก</a></h3>
+    <h3><a href="/category/comedy/add">เพิ่มเรื่องตลก</a></h3> -->
+
+    <hr/>
+        <table class="table table-striped table-bordered" id="customersTable">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Detail</th>
+                    <th>Author</th>
+                    <th>จำนวนการถูกใจ</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="like: ${allLike}">
+                    <td th:text="${like.story.title}"/>
+                    <td th:text="${like.story.storyDetail}"/>
+                    <td th:text="${like.story.author}"/>
+                    <td th:text="${like.count}"/>
+                </tr>
+            </tbody>
+        </table>
+    <h1><a href="/">back to home</a></h1>
+</body>
+</html>

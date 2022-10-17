@@ -9,5 +9,5 @@ import com.example.demo.Entity.LikeStory;
 
 @Repository
 public interface LikeStoryRepository extends JpaRepository<LikeStory, Integer>{
-    Optional<LikeStory> findByStoryId(String storyId);
+    Optional<LikeStory> findByStoryId(Integer storyId);
 }
