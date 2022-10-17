@@ -10,11 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.Entity.Category;
+import com.example.demo.Entity.LikeStory;
 import com.example.demo.Entity.Story;
 import com.example.demo.Entity.StoryDetail;
 import com.example.demo.Repository.CategoryRepository;
+import com.example.demo.Repository.LikeStoryRepository;
 import com.example.demo.Repository.StoryRepository;
-// import com.example.demo.Repository.UserRepository;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -23,15 +24,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Service
 public class UserService {
 
-    // @Autowired
-    // private UserRepository userRepository;
     @Autowired
     private StoryRepository storyRepository;
     @Autowired
     private CategoryRepository categoryRepository;
-
-    // @Autowired
-    // private LikeGagRepository likeGagRepository;
+    @Autowired
+    private LikeStoryRepository likeStoryRepository;
 
     public void getJson() throws JsonParseException, JsonMappingException, IOException{
         ObjectMapper objectMapper = new ObjectMapper();
@@ -79,8 +77,14 @@ public class UserService {
         return result.get();
     }
 
-    public void saveStory(Story gag){
-        storyRepository.save(gag);
+    public void saveStory(Story story){
+        if(story.getTitle().equals("")){
+            story.setTitle("ไม่ระบุชื่อเรื่อง");
+        }
+        if(story.getAuthor().equals("")){
+            story.setAuthor("ไม่ระบุผู้เขียน");
+        }
+        storyRepository.save(story);
     }
 
     public List<Category> saveCategory(String category){
@@ -98,5 +102,18 @@ public class UserService {
         List<Story> match = new ArrayList<Story>();
         getMatchCategory.forEach(g -> match.add(g.getStory()));
         return match;
+    }
+
+    public void saveLikeStory(String storyId){
+        Optional<LikeStory> list = likeStoryRepository.findByStoryId(storyId);
+        if(!list.isEmpty()){
+            LikeStory like = list.get();
+            like.increaseCount();
+            likeStoryRepository.save(like);
+        } else {
+            LikeStory story = new LikeStory(storyId);
+            story.increaseCount();
+            likeStoryRepository.save(story);
+        }
     }
 }

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.Entity.Category;
 import com.example.demo.Entity.Story;
@@ -50,6 +51,11 @@ public class IndexController {
         return "randomGag";
     }
 
+    @GetMapping("/category/comedy")
+    public String goToComedy(Model model){
+        return "comedyIndex";
+    }
+
     @GetMapping("/category/comedy/all")
     public String allComedy(Model model){
         Object comedy = userService.getSpecificCategory("เรื่องตลก");
@@ -64,9 +70,14 @@ public class IndexController {
         return "comedy";
     }
 
+    @GetMapping("/category/horror")
+    public String horrorIndex(Model model){
+        return "horrorIndex";
+    }
+
     @GetMapping("/category/horror/all")
     public String allHorror(Model model){
-        Object horror = userService.getSpecificCategory("เรื่องสยอง");
+        List<Story> horror = userService.getSpecificCategory("เรื่องสยอง");
         model.addAttribute("horrors", horror);
         return "horror";
     }
@@ -115,6 +126,11 @@ public class IndexController {
         return "register";
     }
 
+    @PostMapping("/like_story")
+    public String likeStory(@RequestParam String storyId){
+        userService.saveLikeStory(storyId);
+        return "index";
+    }
     // @PostMapping("/addGag_success")
     // public String addGagSuccess(Story gag){
     //     Category category = userService.saveCategory();
@@ -122,14 +138,4 @@ public class IndexController {
     //     userService.saveStory(gag);
     //     return "registerSuccess";
     // }
-
-    @GetMapping("/category/comedy")
-    public String goToComedy(Model model){
-        return "comedyIndex";
-    }
-
-    @GetMapping("/category/horror")
-    public String horrorIndex(Model model){
-        return "horrorIndex";
-    }
 }

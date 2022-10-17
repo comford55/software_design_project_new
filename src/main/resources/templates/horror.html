@@ -22,13 +22,22 @@
                 </tr>
             </thead>
             <tbody>
-                <tr th:each="horror: ${horrors}">
+                <tr th:each="horror, item : *{horrors}" th:object="${horrors}">
                     <td th:text="${horror.title}"/>
                     <td th:text="${horror.storyDetail}"/>
                     <td th:text="${horror.author}"/>
+                    <td>
+                        <form method="POST" th:action="@{/like_story}">
+                            <input type="hidden" name="storyId" th:value="${horror.id}"/>
+                            <button type="submit">Like</button>
+                        </form>
+                    </td>
                 </tr>
+                
             </tbody>
+            
         </table>
+        
     <h1><a href="/">back to home</a></h1>
 </body>
 </html>
