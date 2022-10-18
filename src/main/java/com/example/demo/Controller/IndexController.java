@@ -1,6 +1,7 @@
 package com.example.demo.Controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -128,15 +129,20 @@ public class IndexController {
     }
 
     @PostMapping("/like_story")
-    public String likeStory(@RequestParam Integer storyId){
-        userService.saveLikeStory(storyId);
+    public String likeStory(@RequestParam(name="storyId") String storyId){
+        userService.saveLikeStory(Integer.parseInt(storyId));
         return "index";
     }
 
     @GetMapping("/mostlike")
-    public String mostLike(Model model){
+    public String mostLike(Model model){  
         List<LikeStory> list = userService.getLikeStory();
-        model.addAttribute("allLike", list);
+        if(!list.isEmpty()){
+            model.addAttribute("allLike", list);
+        } else {
+            List<LikeStory> empty = new ArrayList<LikeStory>();
+            model.addAttribute("allLike", empty);
+        }
         return "likeStory";
     }
 }
