@@ -140,7 +140,7 @@
                         rel="noopener noreferrer"
                         href="/"
                         class="flex items-center px-4 -mb-1 border-b-2 dark:border-transparent"
-                >back to home</a
+                >BACK TO HOME</a
                 >
             </li>
         </ul>
@@ -168,7 +168,7 @@
 <div class="content">
 
     <!-- This is an example component -->
-    <div class="flex items-center justify-center min-h-screen">
+    <div class="flex items-center justify-center min-h-screen" th:each="comedy: ${comedies}" th:object="${comedies}">
         <div
                 class="w-full max-w-lg px-10 py-8 mx-auto bg-slate-300 rounded-lg shadow-xl"
         >
@@ -192,16 +192,16 @@
                                 d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
                         />
                     </svg>
-                    Morbi at sagittis velit
+                    <span th:text="${comedy.title}">Morbi at sagittis velit</span>
                 </summary>
-                <p class="px-4 py-3">
+                <p class="px-4 py-3" th:text="${comedy.storyDetail}">
                     Nunc posuere dapibus urna quis cursus. Mauris malesuada tincidunt
                     diam vel placerat mi tincidunt ac. Nullam augue urna, venenatis ut
                     blandit eget, auctor vel eros. In ut dolor ante
                 </p>
             </details>
 
-            <details class="w-full bg-slate-300 border cursor-pointer mb-3">
+            <!-- <details class="w-full bg-slate-300 border cursor-pointer mb-3">
                 <summary
                         class="w-full bg-slate-300 text-dark flex justify-between px-4 py-3 after:content-['+']"
                 >
@@ -253,7 +253,7 @@
                     diam vel placerat mi tincidunt ac. Nullam augue urna, venenatis ut
                     blandit eget, auctor vel eros. In ut dolor ante
                 </p>
-            </details>
+            </details> -->
         </div>
     </div>
 </div>

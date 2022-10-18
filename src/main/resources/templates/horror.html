@@ -97,40 +97,16 @@
     <div class='w-full max-w-lg px-10 py-8 mx-auto dark:bg-gray-800 rounded-lg shadow-xl'>
         <h1 class="text-xl mb-10 text-center">รวมเรื่องสยอง</h1>
         <!-- THE ACCORDION WITH <details> <summary> HTML Tag -->
-        <details class="w-full dark:bg-gray-800 border cursor-pointer mb-3">
+        <details class="w-full dark:bg-gray-800 border cursor-pointer mb-3" th:each="horror: ${horrors}" th:object="${horrors}">
             <summary class="w-full dark:bg-gray-800 text-dark flex justify-between px-4 py-3  after:content-['+']">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 fill-current hover:text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                 </svg>
-                Morbi at sagittis velit</summary>
-            <p class="px-4 py-3">
+                <span th:text="${horror.title}">Morbi at sagittis velit</span></summary>
+            <p class="px-4 py-3" th:text="${horror.storyDetail}">
                 Nunc posuere dapibus urna quis cursus. Mauris malesuada tincidunt diam vel placerat mi tincidunt ac. Nullam augue urna, venenatis ut blandit eget, auctor vel eros. In ut dolor ante
             </p>
         </details>
-
-        <details class="w-full dark:bg-gray-800 border cursor-pointer mb-3">
-            <summary class="w-full dark:bg-gray-800 text-dark flex justify-between px-4 py-3  after:content-['+']">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 fill-current hover:text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                </svg>
-                Etiam ut lacus in enim sagittis posuere at a elit</summary>
-            <p class="px-4 py-3">
-                Fusce sed laoreet ex. Aenean justo nisl, eleifend eget eleifend sit amet, imperdiet id libero. Suspendisse et tempus leo, et lacinia arcu. Etiam at ante in est efficitur fringilla eleifend nec tellus. Integer sed auctor lectus, nec ullamcorper arcu. Nullam nec eros elit. Nulla tempor massa ut quam elementum dignissim. Sed eu pulvinar est, vel vehicula dolor. Pellentesque in ante vel elit facilisis consectetur eu id felis
-            </p>
-        </details>
-
-        <details class="w-full dark:bg-gray-800 border cursor-pointer mb-3">
-            <summary class="w-full dark:bg-gray-800 text-dark flex justify-between px-4 py-3  after:content-['+']">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 fill-current hover:text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                </svg>
-                Nam auctor fringilla magna id porta
-            </summary>
-            <p class="px-4 py-3">
-                Etiam maximus vitae eros eu vestibulum. Donec posuere, magna non tincidunt dignissim, magna tortor mollis augue, at maximus ante lacus vel tellus. Vestibulum vestibulum consectetur tortor id sagittis. Suspendisse nisi ipsum, pretium a lorem at, laoreet condimentum arcu
-            </p>
-        </details>
-
 
     </div>
 </div>

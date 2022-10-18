@@ -59,7 +59,7 @@ public class IndexController {
 
     @GetMapping("/category/comedy/all")
     public String allComedy(Model model){
-        Object comedy = userService.getSpecificCategory("เรื่องตลก");
+        List<Story> comedy = userService.getSpecificCategory("เรื่องตลก");
         model.addAttribute("comedies", comedy);
         return "comedy";
     }
