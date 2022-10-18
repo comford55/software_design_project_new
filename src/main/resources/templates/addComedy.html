@@ -1,28 +1,246 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add your Comedy Story</title>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add your Horror Story</title>
+    <link rel="stylesheet" th:href="@{/css/main.css}" />
+
+    <style>
+        html {
+            height: 100%;
+        }
+
+        body {
+            margin: 0;
+        }
+
+        .bg {
+            animation: slide 3s ease-in-out infinite alternate;
+            background-image: linear-gradient(-60deg, #6c3 50%, #09f 50%);
+            bottom: 0;
+            left: -50%;
+            opacity: 0.5;
+            position: fixed;
+            right: -50%;
+            top: 0;
+            z-index: -1;
+        }
+
+        .bg2 {
+            animation-direction: alternate-reverse;
+            animation-duration: 4s;
+        }
+
+        .bg3 {
+            animation-duration: 5s;
+        }
+
+        h1 {
+            font-family: monospace;
+        }
+
+        @keyframes slide {
+            0% {
+                transform: translateX(-25%);
+            }
+            100% {
+                transform: translateX(25%);
+            }
+        }
+        details summary::-webkit-details-marker {
+            display: none;
+        }
+
+        details[open] summary {
+            background: rgb(240, 238, 238);
+            color: rgb(0, 0, 0);
+        }
+
+        details[open] summary::after {
+            content: "-";
+        }
+
+        details[open] summary ~ * {
+            animation: slideDown 0.3s ease-in-out;
+        }
+
+        details[open] summary p {
+            opacity: 0;
+            animation-name: showContent;
+            animation-duration: 0.6s;
+            animation-delay: 0.2s;
+            animation-fill-mode: forwards;
+            margin: 0;
+        }
+
+        @keyframes showContent {
+            from {
+                opacity: 0;
+                height: 0;
+            }
+            to {
+                opacity: 1;
+                height: auto;
+            }
+        }
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                height: 0;
+                padding: 0;
+            }
+
+            to {
+                opacity: 1;
+                height: auto;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>Add your Comedy story</h1>
-    <form method="post" th:action="@{/addComedy}" th:object="${comedy}">
-        <div>
-            <label>Title : </label>
-            <input type="text" th:field="*{title}" placeholder="Title"></input>
+<header class="p-4 dark:bg-gray-800 dark:text-gray-100">
+    <div class="container flex justify-between h-16 mx-auto">
+        <a
+                rel="noopener noreferrer"
+                href="/category/comedy"
+                aria-label="Back to homepage"
+                class="flex items-center p-2"
+        >
+            Comedy
+        </a>
+        <ul class="items-stretch hidden space-x-3 md:flex">
+            <li class="flex">
+                <a
+                        rel="noopener noreferrer"
+                        href="/category/comedy/all"
+                        class="flex items-center px-4 -mb-1 border-b-2 dark:border-transparent"
+                >เรื่องตลกทั้งหมด</a
+                >
+            </li>
+            <li class="flex">
+                <a
+                        rel="noopener noreferrer"
+                        href="/category/comedy/random"
+                        class="flex items-center px-4 -mb-1 border-b-2 dark:border-transparent"
+                >สุ่มเรื่องตลก</a
+                >
+            </li>
+            <li class="flex">
+                <a
+                        rel="noopener noreferrer"
+                        href="/category/comedy/add"
+                        class="flex items-center px-4 -mb-1 border-b-2 dark:border-transparent dark:text-violet-400 dark:border-violet-400"
+                >เพิ่มเรื่องตลก</a
+                >
+            </li>
+            <li class="flex">
+                <a
+                        rel="noopener noreferrer"
+                        href="/"
+                        class="flex items-center px-4 -mb-1 border-b-2 dark:border-transparent"
+                >back to home</a
+                >
+            </li>
+        </ul>
+        <button class="flex justify-end p-4 md:hidden">
+            <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    class="w-6 h-6"
+            >
+                <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M4 6h16M4 12h16M4 18h16"
+                ></path>
+            </svg>
+        </button>
+    </div>
+</header>
+<div class="bg"></div>
+<div class="bg bg2"></div>
+<div class="bg bg3"></div>
+<div class="content">
+    <br /><br />
+    <br />
+    <br />
+    <div class="flex items-center justify-center h-screen">
+        <div
+                class="dark:bg-gray-800  font-bold rounded-lg shadow-lg p-10 text-center"
+        >
+            <div class="max-w-screen-md mx-auto p-5">
+                <div class="text-center mb-16">
+                    <p
+                            class="mt-4 text-sm leading-7 font-regular uppercase text-white"
+                    >
+                        Add your Comedy Story
+                    </p>
+
+                </div>
+
+                <form class="w-full">
+                    <div class="flex flex-wrap -mx-3 mb-6">
+                        <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                            <label
+                                    class="block uppercase tracking-wide text-white text-xs font-bold mb-2"
+                                    for="grid-first-name"
+                            >
+                                Title
+                            </label>
+                            <input
+                                    class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                                    id="grid-first-name"
+                                    type="text"
+                            />
+                        </div>
+                        <div class="w-full md:w-1/2 px-3">
+                            <label
+                                    class="block uppercase tracking-wide text-white text-xs font-bold mb-2"
+                                    for="grid-last-name"
+                            >
+                                Author
+                            </label>
+                            <input
+                                    class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                    id="grid-last-name"
+                                    type="text"
+                            />
+                        </div>
+                    </div>
+
+
+                    <div class="flex flex-wrap -mx-3 mb-6">
+                        <div class="w-full px-3">
+                            <label
+                                    class="block uppercase tracking-wide text-white text-xs font-bold mb-2"
+                            >
+                                Detail
+                            </label>
+                            <textarea
+                                    rows="10"
+                                    class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                            >
+                </textarea>
+                        </div>
+                        <div class="flex justify-between w-full px-3">
+
+                            <button
+                                    class="shadow bg-indigo-600 hover:bg-indigo-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-6 rounded"
+                                    type="submit"
+                            >
+                                Add Comedy Story
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
-        <div>
-            <label>Story Detail : </label>
-            <input type="text" th:field="*{storyDetail}" placeholder="Story Detail" required></input>
-        </div>
-        <div>
-            <label>Author : </label>
-            <input type="text" th:field="*{author}" placeholder="Author"></input>
-        </div>
-        <button type="submit">Add Comedy Story</button>
-    </form>
-    <h1><a href="/">back to home</a></h1>
+    </div>
+</div>
 </body>
 </html>

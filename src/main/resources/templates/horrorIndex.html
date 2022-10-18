@@ -4,18 +4,52 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Horror</title>
+    <title>Horror Home</title>
+    <link rel="stylesheet" th:href="@{/css/main.css}" />
+
+    <style>
+        body {
+            background-image: url("https://i.pinimg.com/originals/44/6e/3b/446e3b79395a287ca32f7977dd83b290.jpg");
+            background-size: cover;
+        }
+
+        .bg-box {
+            background:linear-gradient(rgb(17, 24, 39), rgb(75, 85, 99));
+        }
+    </style>
 </head>
 <body>
-    <h1 align="center">เรื่องผีก็น่ากลัว</h1>
-    <form th:action="@{/category/horror/all}" method="GET">
-        <input type="submit" value="เรื่องสยองทั้งหมด"/>
-    </form>
-    <form th:action="@{/category/horror/random}" method="GET">
-        <input type="submit" value="สุ่มเรื่องสยอง"/>
-    </form>
-    <form th:action="@{/category/horror/add}" method="GET">
-        <input type="submit" value="เพิ่มเรื่องสยอง"/>
-    </form>
+<div class="flex items-center justify-center h-screen">
+
+    <div class="bg-box text-white font-bold rounded-lg  shadow-lg p-10 text-center">
+        <h1>เรื่องผีก็น่ากลัว</h1>
+
+
+        <a href="/category/horror/all" class="px-5 py-2.5 relative rounded group font-medium text-white font-medium inline-block">
+            <span class="absolute top-0 left-0 w-full h-full rounded opacity-50 filter blur-sm bg-gradient-to-br from-purple-600 to-blue-500"></span>
+            <span class="h-full w-full inset-0 absolute mt-0.5 ml-0.5 bg-gradient-to-br filter group-active:opacity-0 rounded opacity-50 from-purple-600 to-blue-500"></span>
+            <span class="absolute inset-0 w-full h-full transition-all duration-200 ease-out rounded shadow-xl bg-gradient-to-br filter group-active:opacity-0 group-hover:blur-sm from-purple-600 to-blue-500"></span>
+            <span class="absolute inset-0 w-full h-full transition duration-200 ease-out rounded bg-gradient-to-br to-purple-600 from-blue-500"></span>
+            <span class="relative">เรื่องสยองทั้งหมด</span>
+        </a>
+
+        <a href="/category/horror/random" class="px-5 py-2.5 relative rounded group font-medium text-white font-medium inline-block">
+            <span class="absolute top-0 left-0 w-full h-full rounded opacity-50 filter blur-sm bg-gradient-to-br from-purple-600 to-blue-500"></span>
+            <span class="h-full w-full inset-0 absolute mt-0.5 ml-0.5 bg-gradient-to-br filter group-active:opacity-0 rounded opacity-50 from-purple-600 to-blue-500"></span>
+            <span class="absolute inset-0 w-full h-full transition-all duration-200 ease-out rounded shadow-xl bg-gradient-to-br filter group-active:opacity-0 group-hover:blur-sm from-purple-600 to-blue-500"></span>
+            <span class="absolute inset-0 w-full h-full transition duration-200 ease-out rounded bg-gradient-to-br to-purple-600 from-blue-500"></span>
+            <span class="relative">สุ่มเรื่องสยอง</span>
+        </a>
+
+        <a href="/category/horror/add" class="px-5 py-2.5 relative rounded group font-medium text-white font-medium inline-block">
+            <span class="absolute top-0 left-0 w-full h-full rounded opacity-50 filter blur-sm bg-gradient-to-br from-purple-600 to-blue-500"></span>
+            <span class="h-full w-full inset-0 absolute mt-0.5 ml-0.5 bg-gradient-to-br filter group-active:opacity-0 rounded opacity-50 from-purple-600 to-blue-500"></span>
+            <span class="absolute inset-0 w-full h-full transition-all duration-200 ease-out rounded shadow-xl bg-gradient-to-br filter group-active:opacity-0 group-hover:blur-sm from-purple-600 to-blue-500"></span>
+            <span class="absolute inset-0 w-full h-full transition duration-200 ease-out rounded bg-gradient-to-br to-purple-600 from-blue-500"></span>
+            <span class="relative">เพิ่มเรื่องสยอง</span>
+        </a>
+    </div>
+</div>
+
 </body>
 </html>

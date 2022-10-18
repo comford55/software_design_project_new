@@ -68,7 +68,7 @@ public class IndexController {
     public String randomComedy(Model model){
         Story comedy = userService.getRandomComedy();
         model.addAttribute("comedies", comedy);
-        return "comedy";
+        return "randomComedy";
     }
 
     @GetMapping("/category/horror")
@@ -87,7 +87,7 @@ public class IndexController {
     public String randomHorror(Model model){
         Story horror = userService.getRandomHorror();
         model.addAttribute("horrors", horror);
-        return "horror";
+        return "randomHorror";
     }
 
     @GetMapping("/category/horror/add")

@@ -1,43 +1,138 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Random Horror</title>
+    <link rel="stylesheet" th:href="@{/css/main.css}" />
+
+    <style>
+        body {
+            color: white;
+            background-image: url("https://i.pinimg.com/originals/44/6e/3b/446e3b79395a287ca32f7977dd83b290.jpg");
+            background-size: cover;
+        }
+        details summary::-webkit-details-marker {
+            display: none;
+        }
+
+
+        details[open] summary {
+            background: rgb(0, 0, 0);
+            color: white
+        }
+
+        details[open] summary::after {
+            content: "-";
+        }
+
+        details[open] summary ~ * {
+            animation: slideDown 0.3s ease-in-out;
+        }
+
+        details[open] summary p {
+            opacity: 0;
+            animation-name: showContent;
+            animation-duration: 0.6s;
+            animation-delay: 0.2s;
+            animation-fill-mode: forwards;
+            margin: 0;
+        }
+
+        @keyframes showContent {
+            from {
+                opacity: 0;
+                height: 0;
+            }
+            to {
+                opacity: 1;
+                height: auto;
+            }
+        }
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                height: 0;
+                padding: 0;
+            }
+
+            to {
+                opacity: 1;
+                height: auto;
+            }
+        }
+    </style>
+
 </head>
 <body>
-    <h1 align="center">Horror</h1>
-    <h3><a href="/category/horror/all">เรื่องสยองทั้งหมด</a></h3>
-    <h3><a href="/category/horror/random">สุ่มเรื่องสยอง</a></h3>
-    <h3><a href="/category/horror/add">เพิ่มเรื่องสยอง</a></h3>
+<header class="p-4 dark:bg-gray-800 dark:text-gray-100">
+    <div class="container flex justify-between h-16 mx-auto">
+        <a rel="noopener noreferrer" href="/category/horror" aria-label="Back to homepage" class="flex items-center p-2">
+            Horror
+        </a>
+        <ul class="items-stretch hidden space-x-3 md:flex">
+            <li class="flex">
+                <a rel="noopener noreferrer" href="/category/horror/all" class="flex items-center px-4 -mb-1 border-b-2 dark:border-transparent dark:text-violet-400 dark:border-violet-400">เรื่องสยองทั้งหมด</a>
+            </li>
+            <li class="flex">
+                <a rel="noopener noreferrer" href="/category/horror/random" class="flex items-center px-4 -mb-1 border-b-2 dark:border-transparent">สุ่มเรื่องสยอง</a>
+            </li>
+            <li class="flex">
+                <a rel="noopener noreferrer" href="/category/horror/add" class="flex items-center px-4 -mb-1 border-b-2 dark:border-transparent">เพิ่มเรื่องสยอง</a>
+            </li>
+            <li class="flex">
+                <a rel="noopener noreferrer" href="/" class="flex items-center px-4 -mb-1 border-b-2 dark:border-transparent">back to home</a>
+            </li>
+        </ul>
+        <button class="flex justify-end p-4 md:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+        </button>
+    </div>
+</header>
+<!-- This is an example component -->
+<div class='flex items-center justify-center min-h-screen'>
+    <div class='w-full max-w-lg px-10 py-8 mx-auto dark:bg-gray-800 rounded-lg shadow-xl'>
+        <h1 class="text-xl mb-10 text-center">รวมเรื่องสยอง</h1>
+        <!-- THE ACCORDION WITH <details> <summary> HTML Tag -->
+        <details class="w-full dark:bg-gray-800 border cursor-pointer mb-3">
+            <summary class="w-full dark:bg-gray-800 text-dark flex justify-between px-4 py-3  after:content-['+']">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 fill-current hover:text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                </svg>
+                Morbi at sagittis velit</summary>
+            <p class="px-4 py-3">
+                Nunc posuere dapibus urna quis cursus. Mauris malesuada tincidunt diam vel placerat mi tincidunt ac. Nullam augue urna, venenatis ut blandit eget, auctor vel eros. In ut dolor ante
+            </p>
+        </details>
 
-    <hr/>
-        <table class="table table-striped table-bordered" id="customersTable">
-            <thead>
-                <tr>
-                    <th>Title</th>
-                    <th>Detail</th>
-                    <th>Author</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="horror, item : *{horrors}" th:object="${horrors}">
-                    <td th:text="${horror.title}"/>
-                    <td th:text="${horror.storyDetail}"/>
-                    <td th:text="${horror.author}"/>
-                    <td>
-                        <form method="POST" th:action="@{/like_story}">
-                            <input type="hidden" name="storyId" th:value="${horror.id}"/>
-                            <button type="submit">Like</button>
-                        </form>
-                    </td>
-                </tr>
-                
-            </tbody>
-            
-        </table>
-        
-    <h1><a href="/">back to home</a></h1>
+        <details class="w-full dark:bg-gray-800 border cursor-pointer mb-3">
+            <summary class="w-full dark:bg-gray-800 text-dark flex justify-between px-4 py-3  after:content-['+']">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 fill-current hover:text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                </svg>
+                Etiam ut lacus in enim sagittis posuere at a elit</summary>
+            <p class="px-4 py-3">
+                Fusce sed laoreet ex. Aenean justo nisl, eleifend eget eleifend sit amet, imperdiet id libero. Suspendisse et tempus leo, et lacinia arcu. Etiam at ante in est efficitur fringilla eleifend nec tellus. Integer sed auctor lectus, nec ullamcorper arcu. Nullam nec eros elit. Nulla tempor massa ut quam elementum dignissim. Sed eu pulvinar est, vel vehicula dolor. Pellentesque in ante vel elit facilisis consectetur eu id felis
+            </p>
+        </details>
+
+        <details class="w-full dark:bg-gray-800 border cursor-pointer mb-3">
+            <summary class="w-full dark:bg-gray-800 text-dark flex justify-between px-4 py-3  after:content-['+']">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 fill-current hover:text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                </svg>
+                Nam auctor fringilla magna id porta
+            </summary>
+            <p class="px-4 py-3">
+                Etiam maximus vitae eros eu vestibulum. Donec posuere, magna non tincidunt dignissim, magna tortor mollis augue, at maximus ante lacus vel tellus. Vestibulum vestibulum consectetur tortor id sagittis. Suspendisse nisi ipsum, pretium a lorem at, laoreet condimentum arcu
+            </p>
+        </details>
+
+
+    </div>
+</div>
 </body>
 </html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Random Horror</title>
+  <link rel="stylesheet" th:href="@{/css/main.css}" />
+  <style>
+    body {
+      color: white;
+      background-image: url("https://i.pinimg.com/originals/44/6e/3b/446e3b79395a287ca32f7977dd83b290.jpg");
+      background-size: cover;
+    }
+  </style>
+
+</head>
+<body>
+<header class="p-4 dark:bg-gray-800 dark:text-gray-100">
+  <div class="container flex justify-between h-16 mx-auto">
+    <a rel="noopener noreferrer" href="/category/horror" aria-label="Back to homepage" class="flex items-center p-2">
+      Horror
+    </a>
+    <ul class="items-stretch hidden space-x-3 md:flex">
+      <li class="flex">
+        <a rel="noopener noreferrer" href="/category/horror/all" class="flex items-center px-4 -mb-1 border-b-2 dark:border-transparent">เรื่องสยองทั้งหมด</a>
+      </li>
+      <li class="flex">
+        <a rel="noopener noreferrer" href="/category/horror/random" class="flex items-center px-4 -mb-1 border-b-2 dark:border-transparent dark:text-violet-400 dark:border-violet-400">สุ่มเรื่องสยอง</a>
+      </li>
+      <li class="flex">
+        <a rel="noopener noreferrer" href="/category/horror/add" class="flex items-center px-4 -mb-1 border-b-2 dark:border-transparent">เพิ่มเรื่องสยอง</a>
+      </li>
+      <li class="flex">
+        <a rel="noopener noreferrer" href="/" class="flex items-center px-4 -mb-1 border-b-2 dark:border-transparent">back to home</a>
+      </li>
+    </ul>
+    <button class="flex justify-end p-4 md:hidden">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+      </svg>
+    </button>
+  </div>
+</header>
+
+<!-- Article 1 -->
+<div class="flex items-center justify-center h-screen">
+  <article
+          class="max-w-2xl px-6 py-24 mx-auto space-y-16 dark:bg-gray-800 dark:text-gray-50 "
+  >
+    <div class="w-full mx-auto space-y-4">
+      <h1 class="text-5xl font-bold leading-none">Title</h1>
+      <div class="flex flex-wrap space-x-2 text-sm dark:text-gray-400">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 fill-current hover:text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+        </svg>
+      </div>
+      <p class="text-sm dark:text-gray-400">
+        by
+        <a
+                href="#"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="hover:underline dark:text-violet-400"
+        >
+          <span>Author</span> </a
+        >on
+        <time datetime="2021-02-12 15:34:18-0200">Feb 12th 2022</time>
+      </p>
+    </div>
+    <div class="dark:text-gray-100">
+      <p>
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Earum
+        inventore doloremque nemo deserunt, officiis, hic natus asperiores
+        ipsam, rem laborum ut delectus libero neque accusantium corporis velit
+        nihil vero cumque!
+      </p>
+    </div>
+  </article>
+
+</div>
+
+
+
+</div>
+</body>
+</html>
