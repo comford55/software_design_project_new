@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Comedy</title>
+    <link rel="stylesheet" th:href="@{/css/main.css}" />
+    <style>
+        .bg-box {
+            background: linear-gradient(rgb(217, 219, 224), rgb(210, 212, 214));
+        }
+
+        html {
+            height: 100%;
+        }
+
+        body {
+            margin: 0;
+        }
+
+        .bg {
+            animation: slide 3s ease-in-out infinite alternate;
+            background-image: linear-gradient(-60deg, #6c3 50%, #09f 50%);
+            bottom: 0;
+            left: -50%;
+            opacity: 0.5;
+            position: fixed;
+            right: -50%;
+            top: 0;
+            z-index: -1;
+        }
+
+        .bg2 {
+            animation-direction: alternate-reverse;
+            animation-duration: 4s;
+        }
+
+        .bg3 {
+            animation-duration: 5s;
+        }
+
+
+        h1 {
+            font-family: monospace;
+        }
+
+        @keyframes slide {
+            0% {
+                transform: translateX(-25%);
+            }
+            100% {
+                transform: translateX(25%);
+            }
+        }
+    </style>
+</head>
+<body><div class="bg"></div>
+<div class="bg bg2"></div>
+<div class="bg bg3"></div>
+<div class="content">
+    <div class="flex items-center justify-center h-screen">
+        <div
+                class="bg-box text-blue-500 font-bold rounded-lg shadow-lg p-10 text-center"
+        >
+            <h1>เรื่องตลกก็ดี</h1>
+
+            <a
+                    href="/category/comedy/all"
+                    class="px-5 py-2.5 relative rounded group font-medium text-white font-medium inline-block"
+            >
+          <span
+                  class="absolute top-0 left-0 w-full h-full rounded opacity-50 filter blur-sm bg-gradient-to-br from-purple-600 to-blue-500"
+          ></span>
+                <span
+                        class="h-full w-full inset-0 absolute mt-0.5 ml-0.5 bg-gradient-to-br filter group-active:opacity-0 rounded opacity-50 from-purple-600 to-blue-500"
+                ></span>
+                <span
+                        class="absolute inset-0 w-full h-full transition-all duration-200 ease-out rounded shadow-xl bg-gradient-to-br filter group-active:opacity-0 group-hover:blur-sm from-purple-600 to-blue-500"
+                ></span>
+                <span
+                        class="absolute inset-0 w-full h-full transition duration-200 ease-out rounded bg-gradient-to-br to-purple-600 from-blue-500"
+                ></span>
+                <span class="relative">เรื่องตลกทั้งหมด</span>
+            </a>
+
+            <a
+                    href="/category/comedy/random"
+                    class="px-5 py-2.5 relative rounded group font-medium text-white font-medium inline-block"
+            >
+          <span
+                  class="absolute top-0 left-0 w-full h-full rounded opacity-50 filter blur-sm bg-gradient-to-br from-purple-600 to-blue-500"
+          ></span>
+                <span
+                        class="h-full w-full inset-0 absolute mt-0.5 ml-0.5 bg-gradient-to-br filter group-active:opacity-0 rounded opacity-50 from-purple-600 to-blue-500"
+                ></span>
+                <span
+                        class="absolute inset-0 w-full h-full transition-all duration-200 ease-out rounded shadow-xl bg-gradient-to-br filter group-active:opacity-0 group-hover:blur-sm from-purple-600 to-blue-500"
+                ></span>
+                <span
+                        class="absolute inset-0 w-full h-full transition duration-200 ease-out rounded bg-gradient-to-br to-purple-600 from-blue-500"
+                ></span>
+                <span class="relative">สุ่มเรื่องตลก</span>
+            </a>
+
+            <a
+                    href="/category/comedy/add"
+                    class="px-5 py-2.5 relative rounded group font-medium text-white font-medium inline-block"
+            >
+          <span
+                  class="absolute top-0 left-0 w-full h-full rounded opacity-50 filter blur-sm bg-gradient-to-br from-purple-600 to-blue-500"
+          ></span>
+                <span
+                        class="h-full w-full inset-0 absolute mt-0.5 ml-0.5 bg-gradient-to-br filter group-active:opacity-0 rounded opacity-50 from-purple-600 to-blue-500"
+                ></span>
+                <span
+                        class="absolute inset-0 w-full h-full transition-all duration-200 ease-out rounded shadow-xl bg-gradient-to-br filter group-active:opacity-0 group-hover:blur-sm from-purple-600 to-blue-500"
+                ></span>
+                <span
+                        class="absolute inset-0 w-full h-full transition duration-200 ease-out rounded bg-gradient-to-br to-purple-600 from-blue-500"
+                ></span>
+                <span class="relative">เพิ่มเรื่องตลก</span>
+            </a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

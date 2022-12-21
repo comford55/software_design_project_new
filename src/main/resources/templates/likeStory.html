@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/main.css}" />
+
+    <title>Favorite</title>
+    <style>
+
+    </style>
+</head>
+<body>
+<header class="p-4 bg-slate-100 text-black text-4xl text-center">
+    <h1>เรื่องที่ผู้คนชื่นชอบ</h1>
+</header>
+
+<div class="container flex justify-center mx-auto mt-10" th:each="like: ${allLike}">
+    <div class="flex flex-col">
+        <div class="w-full">
+            <div class="border-b border-gray-200 shadow">
+                <table class="divide-y divide-gray-300 w-full">
+                    <thead class="bg-gray-50">
+                    <tr>
+                        <th class="px-6 py-2 text-xs text-gray-500">
+                            ID
+                        </th>
+                        <th class="px-6 py-2 text-xs text-gray-500">
+                            Title
+                        </th>
+                        <th class="px-6 py-2 text-xs text-gray-500">
+                            Detail
+                        </th>
+                        <th class="px-6 py-2 text-xs text-gray-500">
+                            จำนวนการถูกใจ
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-300">
+
+                    <tr>
+                        <td class="px-6 py-4 text-sm text-gray-500"  th:text="${like.story.id}">
+                            1
+                        </td>
+                        <td class="px-6 py-4">
+                            <div class="text-sm text-gray-900" th:text="${like.story.title}">
+                                Title
+                            </div>
+                        </td>
+                        <td class="px-6 py-4">
+                            <div class="text-sm text-gray-500" th:text="${like.story.storyDetail}">details</div>
+                        </td>
+                        <td class="px-6 py-4 text-sm text-gray-500" th:text="${like.count}">
+                            100
+                        </td>
+
+                        
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

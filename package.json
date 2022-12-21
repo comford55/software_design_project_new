@@ -1,0 +1,23 @@
+{
+  "name": "softwaredesignprojectgags",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/comford55/software_design_project_new.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/comford55/software_design_project_new/issues"
+  },
+  "homepage": "https://github.com/comford55/software_design_project_new#readme",
+  "devDependencies": {
+    "tailwindcss": "^3.1.8"
+  }
+}
